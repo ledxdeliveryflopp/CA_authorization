@@ -7,7 +7,6 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
-fastapi = {extras = ["all"], version = "^0.111.0"}
 psycopg2-binary = "^2.9.9"
 asyncpg = "^0.29.0"
 email-validator = "^2.1.1"
@@ -20,6 +19,10 @@ alembic = "^1.13.1"
 pre-commit = "^3.7.0"
 mypy = "^1.10.0"
 types-passlib = "^1.7.7.20240327"
+uvicorn = "^0.29.0"
+fastapi = "^0.111.0"
+
+
 
 
 [build-system]
@@ -30,3 +33,4 @@ build-backend = "poetry.core.masonry.api"
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.4.3"
 pre-commit = "^3.7.0"
+
