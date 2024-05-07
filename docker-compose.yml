@@ -1,0 +1,51 @@
+version: "3.8"
+
+services:
+
+  database:
+    image: postgres
+    container_name: database
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - database:/data/
+    ports:
+      - "5432:5432"
+    networks:
+      - sql
+
+  vault:
+    image: library/vault:1.13.3
+    container_name: vault
+    cap_add:
+      - IPC_LOCK
+    volumes:
+      - ./vault/config:/vault/config
+      - ./vault/policies:/vault/policies
+    command: >
+          sh -c "vault server -config=/vault/config/vault-config.json"
+    ports:
+      - "8200:8200/tcp"
+    networks:
+      - vault
+
+  authorization:
+    build:
+      ./
+    container_name: authorization_microservice
+    command: uvicorn main:authorization --host 0.0.0.0 --port 7200
+    ports:
+      - "7200:7200"
+    networks:
+      - sql
+      - vault
+
+volumes:
+  database:
+
+networks:
+  sql:
+    external: true
+  vault:
+    external: true
