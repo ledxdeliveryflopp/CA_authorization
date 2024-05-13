@@ -14,3 +14,5 @@ class UserModel(AbstractModel):
     description = Column(String, nullable=True, comment="Описание профиля")
     city = Column(String, nullable=True, index=True, comment="Родной город")
     birthday = Column(DateTime, nullable=False, comment="Дата рождения")
+
+    avatar = Column(String, nullable=True, comment="Путь до аватарки")

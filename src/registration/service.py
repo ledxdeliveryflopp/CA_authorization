@@ -17,7 +17,7 @@ class RegistrationService(RegistrationRepository):
 
     async def create_user(self, schemas: CreateUserSchemas) -> dict:
         """Создание пользователя"""
-        user = await self.find_user_by_email_or_mobile(email=schemas.email,  mobile=schemas.mobile)
+        user = await self.find_user_by_email_or_mobile(email=schemas.email, mobile=schemas.mobile)
         if user:
             raise UserExist
         user = UserModel(**schemas.model_dump(exclude=schemas.password))
